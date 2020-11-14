@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    {% for row in data %}
+    <div class="col-md-6 img">
+      <img src="{{ url_for('static', filename='img/'+row[5]) }}"  alt="" class="img-rounded" height="300" width="270">
+    </div>
+    <div class="col-md-6 details">
+      <blockquote>
+        <h5>Name: {{row[2]}}</h5>
+        <small><cite title="Source Title">Email: {{row[3]}}  <i class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <p>
+        Account no: {{row[1]}} <br>
+        Account balance: {{row[4]}} <br>
+      </p>
+      
+      <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#details">Transfer Money</button>
+      <div class="collapse my-3" id="details">
+        <form action="/transfer/{{row[1]}}" method="POST">
+          {% endfor %}
+    <div class="form-group row" style=font>
+      <label class="col-sm-3 col-form-label text-right">Receiver Name<span></span>:</label>
+      <select required class="form-control col-sm-8" id="recipient" name="name">
+        
+        {% for row in data1 %}
+
+        {% if name != row[2] %}
+        
+        <option>{{row[2]}}</option>
+        
+        {% endif %}
+
+        
+        {% endfor %}
+      
+      </select>
+      <br>
+      <br>
+      <label class="col-sm-3 col-form-label text-right">Receiver Accountno<span></span>:</label>
+      <select required class="form-control col-sm-8" id="recipient" name="no">
+        
+        {% for row in data3 %}
+
+        {% if no != row[1] %}
+        
+        <option>{{row[1]}}</option>
+        
+        {% endif %}
+
+        
+        {% endfor %}
+      
+      </select>
+     
+</div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label text-right">Amount<span></span>:</label>
+  <input class="col-sm-8" type="number" id="credit" name="credit" required>
+</div>
+
+<button class="btn btn-lg btn-primary" type="submit">Transfer</button>
+  
+</form>
+</div>
+    </div>
+    
+  </div>
+  
+</div>
+
+
+
+
+      
+            
+           
+
+      {% endblock %}
